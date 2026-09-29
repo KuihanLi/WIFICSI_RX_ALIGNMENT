@@ -1,0 +1,32 @@
+{
+  "release_identity": "B2_MEAN_FROZEN_PUBLIC_SNAPSHOT_20260929",
+  "data_contract": {
+    "representation": "amplitude",
+    "receiver_views": 3,
+    "input_channels": 2,
+    "channel_semantics": ["robust-normalized amplitude", "observation mask"],
+    "time_bins": 128,
+    "subcarrier_bins": 64,
+    "window_events": 300,
+    "stride_events": 150,
+    "min_rx_coverage": 0.9,
+    "max_windows_per_physical_recording": 64
+  },
+  "model": {
+    "condition": "B2_MEAN",
+    "latent_dim": 64,
+    "dropout": 0.15,
+    "fusion": "equal_mean_over_three_receiver_latents"
+  },
+  "training": {
+    "batch_size": 128,
+    "max_epochs": 18,
+    "patience": 3,
+    "learning_rate": 0.0008,
+    "weight_decay": 0.0001,
+    "amp": true,
+    "seed_list": [2036,2037,2038,2039,2040,2041,2042,2043,2044,2045],
+    "loss": "sample-first physical-recording-weighted cross entropy",
+    "validation": "sample-first inner validation; balanced accuracy early stopping"
+  }
+}
